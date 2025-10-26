@@ -282,6 +282,63 @@
             color: var(--dark);
         }
 
+        /* Video Section */
+        .video-section {
+            background: var(--light);
+        }
+
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .video-player {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+        }
+
+        .video-player video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-player i {
+            font-size: 50px;
+            position: absolute;
+            opacity: 0.8;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .video-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
         /* Testimonials */
         .testimonials {
             background: var(--light);
@@ -337,35 +394,6 @@
         .author-info p {
             color: #666;
             font-size: 14px;
-        }
-
-        /* Video Section */
-        .video-section {
-            text-align: center;
-        }
-
-        .video-container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .video-placeholder {
-            height: 400px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-        }
-
-        .video-placeholder i {
-            font-size: 60px;
-            margin-bottom: 20px;
         }
 
         /* Contact */
@@ -427,6 +455,28 @@
         textarea.form-control {
             height: 150px;
             resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Patient Form */
+        .patient-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 40px;
+        }
+
+        .patient-form h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+            font-size: 24px;
         }
 
         /* Footer */
@@ -543,6 +593,10 @@
             .slide-content {
                 margin: 0 5%;
             }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -577,7 +631,7 @@
                 <li><a href="#home">Nyumbani</a></li>
                 <li><a href="#products">Bidhaa</a></li>
                 <li><a href="#conditions">Magonjwa</a></li>
-                <li><a href="#about">Kuhusu Sisi</a></li>
+                <li><a href="#videos">Video</a></li>
                 <li><a href="#testimonials">Maoni</a></li>
                 <li><a href="#contact">Wasiliana</a></li>
             </ul>
@@ -703,16 +757,62 @@
     </section>
 
     <!-- Video Section -->
-    <section class="video-section">
+    <section class="video-section" id="videos">
         <div class="section-title">
             <h2>Video Zaidi Kuhusu TAZ GENIUS</h2>
             <p>Tazama video zetu za maelezo kuhusu huduma na bidhaa zetu</p>
         </div>
         <div class="video-container">
-            <div class="video-placeholder">
-                <div>
+            <div class="video-card">
+                <div class="video-player">
+                    <video controls poster="video-poster1.jpg">
+                        <source src="1.mp4" type="video/mp4">
+                        Kivinjari chako hakitumii video tag.
+                    </video>
                     <i class="fas fa-play-circle"></i>
-                    <p>Video ya TAZ GENIUS - Tiba Asili Tanzania</p>
+                </div>
+                <div class="video-info">
+                    <h3>Utangulizi wa TAZ GENIUS</h3>
+                    <p>Jifunze zaidi kuhusu TAZ GENIUS na huduma zetu za tiba asili.</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-player">
+                    <video controls poster="video-poster2.jpg">
+                        <source src="2.mp4" type="video/mp4">
+                        Kivinjari chako hakitumii video tag.
+                    </video>
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="video-info">
+                    <h3>Bidhaa Zetu Bora</h3>
+                    <p>Tazama bidhaa zetu bora za tiba asili na matumizi yake.</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-player">
+                    <video controls poster="video-poster3.jpg">
+                        <source src="3.mp4" type="video/mp4">
+                        Kivinjari chako hakitumii video tag.
+                    </video>
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="video-info">
+                    <h3>Maoni ya Wateja</h3>
+                    <p>Sikiliza maoni halisi ya wateja wetu waliosaidika na huduma zetu.</p>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-player">
+                    <video controls poster="video-poster4.jpg">
+                        <source src="4.mp4" type="video/mp4">
+                        Kivinjari chako hakitumii video tag.
+                    </video>
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="video-info">
+                    <h3>Usafishaji wa Nyota</h3>
+                    <p>Jifunze kuhusu huduma yetu ya usafishaji wa nyota na matatizo ya kiroho.</p>
                 </div>
             </div>
         </div>
@@ -764,6 +864,72 @@
         </div>
     </section>
 
+    <!-- Patient Form Section -->
+    <section id="patient-form">
+        <div class="section-title">
+            <h2>Wasiliana Nasi Kuhusu Tatizo Lako</h2>
+            <p>Tujulishe tatizo lako na tutakupatia ushauri sahihi wa dawa za asili</p>
+        </div>
+        <div class="patient-form">
+            <h3>Fomu Ya Taarifa Za Mgonjwa</h3>
+            <form id="patientInfoForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Jina Kamili *</label>
+                        <input type="text" id="fullName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Namba Ya Simu *</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Umri (Miaka) *</label>
+                        <input type="number" id="age" class="form-control" min="1" max="120" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Jinsia *</label>
+                        <select id="gender" class="form-control" required>
+                            <option value="">Chagua jinsia yako</option>
+                            <option value="Mme">Mme</option>
+                            <option value="Mke">Mke</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="region">Mkoa *</label>
+                        <input type="text" id="region" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="district">Wilaya *</label>
+                        <input type="text" id="district" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="location">Eneo Maalum (Kata/Shehia/Street) *</label>
+                    <input type="text" id="location" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="problem">Tatizo/Ugonjwa Unaojisikia *</label>
+                    <textarea id="problem" class="form-control" placeholder="Eleza kwa kina tatizo lako, dalili zake, na muda umekuwa nalo..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="previousTreatment">Umewahi Kutibiwa Mahali Pengine?</label>
+                    <textarea id="previousTreatment" class="form-control" placeholder="Eleza kama umewahi kupata matibabu mahali pengine na matokeo yake..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Tuma Taarifa</button>
+            </form>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact">
         <div class="section-title">
@@ -804,22 +970,22 @@
             </div>
             <div class="contact-form">
                 <h3>Tuma Ujumbe</h3>
-                <form>
+                <form id="contactForm">
                     <div class="form-group">
-                        <label for="name">Jina Kamili</label>
-                        <input type="text" id="name" class="form-control" required>
+                        <label for="contactName">Jina Kamili</label>
+                        <input type="text" id="contactName" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Namba Ya Simu</label>
-                        <input type="tel" id="phone" class="form-control" required>
+                        <label for="contactPhone">Namba Ya Simu</label>
+                        <input type="tel" id="contactPhone" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Barua Pepe</label>
-                        <input type="email" id="email" class="form-control">
+                        <label for="contactEmail">Barua Pepe</label>
+                        <input type="email" id="contactEmail" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="message">Ujumbe Wako</label>
-                        <textarea id="message" class="form-control" required></textarea>
+                        <label for="contactMessage">Ujumbe Wako</label>
+                        <textarea id="contactMessage" class="form-control" required></textarea>
                     </div>
                     <button type="submit" class="btn">Tuma Ujumbe</button>
                 </form>
@@ -846,7 +1012,7 @@
                     <li><a href="#home">Nyumbani</a></li>
                     <li><a href="#products">Bidhaa Zetu</a></li>
                     <li><a href="#conditions">Magonjwa</a></li>
-                    <li><a href="#about">Kuhusu Sisi</a></li>
+                    <li><a href="#videos">Video</a></li>
                     <li><a href="#testimonials">Maoni</a></li>
                 </ul>
             </div>
@@ -907,12 +1073,90 @@
             navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
         });
         
-        // Form Submission
-        const contactForm = document.querySelector('form');
+        // Patient Form Submission
+        const patientForm = document.getElementById('patientInfoForm');
+        patientForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = {
+                jina: document.getElementById('fullName').value,
+                simu: document.getElementById('phone').value,
+                umri: document.getElementById('age').value,
+                jinsia: document.getElementById('gender').value,
+                mkoa: document.getElementById('region').value,
+                wilaya: document.getElementById('district').value,
+                eneo: document.getElementById('location').value,
+                tatizo: document.getElementById('problem').value,
+                matibabu_ya_awali: document.getElementById('previousTreatment').value
+            };
+            
+            // Format message for WhatsApp
+            const message = `TAARIFA ZA MGONJWA:
+Jina: ${formData.jina}
+Simu: ${formData.simu}
+Umri: ${formData.umri} miaka
+Jinsia: ${formData.jinsia}
+Mkoa: ${formData.mkoa}
+Wilaya: ${formData.wilaya}
+Eneo: ${formData.eneo}
+Tatizo: ${formData.tatizo}
+Matibabu ya Awali: ${formData.matibabu_ya_awali}`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Send to WhatsApp
+            window.open(`https://wa.me/255766646521?text=${encodedMessage}`, '_blank');
+            
+            // Show confirmation
+            alert('Asante! Taarifa zako zimetumwa kikamilifu. Tutawasiliana nawe kupitia WhatsApp.');
+            patientForm.reset();
+        });
+        
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Asante! Ujumbe wako umepokelewa. Tutawasiliana nawe hivi karibuni.');
+            
+            // Collect form data
+            const formData = {
+                jina: document.getElementById('contactName').value,
+                simu: document.getElementById('contactPhone').value,
+                baruaPepe: document.getElementById('contactEmail').value,
+                ujumbe: document.getElementById('contactMessage').value
+            };
+            
+            // Format message for WhatsApp
+            const message = `UJUMBE KUTOKA KWA MTEJA:
+Jina: ${formData.jina}
+Simu: ${formData.simu}
+Barua Pepe: ${formData.baruaPepe}
+Ujumbe: ${formData.ujumbe}`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Send to WhatsApp
+            window.open(`https://wa.me/255766646521?text=${encodedMessage}`, '_blank');
+            
+            // Show confirmation
+            alert('Asante! Ujumbe wako umetumwa kikamilifu. Tutawasiliana nawe hivi karibuni.');
             contactForm.reset();
+        });
+        
+        // Video player functionality
+        const videos = document.querySelectorAll('.video-player video');
+        const playIcons = document.querySelectorAll('.video-player i');
+        
+        videos.forEach((video, index) => {
+            video.addEventListener('play', () => {
+                playIcons[index].style.display = 'none';
+            });
+            
+            video.addEventListener('pause', () => {
+                playIcons[index].style.display = 'block';
+            });
         });
     </script>
 </body>
