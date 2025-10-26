@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAZ GENIUS - Tiba Asili Tanzania</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --secondary: #4caf50;
+            --accent: #ff9800;
+            --light: #f5f5f5;
+            --dark: #333;
+            --text: #444;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background-color: var(--primary);
+            color: white;
+            padding: 8px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .top-bar i {
+            margin-right: 5px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 15px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Slider */
+        .slider {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            max-width: 600px;
+            margin-left: 10%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .slide-content h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .slide-content p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #666;
+        }
+
+        /* Products */
+        .products {
+            background: var(--light);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .product-info p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        /* Conditions */
+        .condition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .condition-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .condition-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .condition-card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .condition-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--light);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 60px;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            margin-right: 15px;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Video Section */
+        .video-section {
+            text-align: center;
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .video-placeholder {
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .video-placeholder i {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        /* Contact */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-item i {
+            margin-right: 15px;
+            font-size: 20px;
+            margin-top: 5px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        textarea.form-control {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .slide-content {
+                margin: 0 5%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slider {
+                height: 400px;
+            }
+
+            .slide-content h2 {
+                font-size: 28px;
+            }
+
+            section {
+                padding: 40px 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="top-bar">
+            <a href="tel:+255766646521"><i class="fas fa-phone"></i> 0766 64 65 21</a>
+            <a href="tel:+255656466521"><i class="fas fa-phone"></i> 0656 46 65 21</a>
+            <a href="tel:+25569864752"><i class="fas fa-phone"></i> 0698 64 75 2</a>
+        </div>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="logo.png" alt="TAZ GENIUS Logo">
+                <h1>TAZ GENIUS</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Nyumbani</a></li>
+                <li><a href="#products">Bidhaa</a></li>
+                <li><a href="#conditions">Magonjwa</a></li>
+                <li><a href="#about">Kuhusu Sisi</a></li>
+                <li><a href="#testimonials">Maoni</a></li>
+                <li><a href="#contact">Wasiliana</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Slider -->
+    <section class="slider" id="home">
+        <div class="slide active" style="background-image: url('slide1.jpg');">
+            <div class="slide-content">
+                <h2>TAZ GENIUS - Tiba Asili Tanzania</h2>
+                <p>Dawa za asili zenye nguvu za kutibu magonjwa mbalimbali. Tunakupa afya bora kwa njia ya asili.</p>
+                <a href="#products" class="btn">Tazama Bidhaa Zetu</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('slide2.jpg');">
+            <div class="slide-content">
+                <h2>Dawa Asili Zenye Ufanisi</h2>
+                <p>Matibabu salama na yenye nguvu kwa magonjwa kama sukari, shinikizo la damu, maumivu ya viungo na mengineyo.</p>
+                <a href="#conditions" class="btn">Magonjwa Tunayotibu</a>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('slide3.jpg');">
+            <div class="slide-content">
+                <h2>Usafisha Nyota na Matatizo Mengine</h2>
+                <p>Pamoja na tiba za mwili, tunatoa huduma za usafishaji wa nyota kwa matatizo ya kiroho.</p>
+                <a href="#contact" class="btn">Wasiliana Nasi</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-title">
+            <h2>Bidhaa Zetu</h2>
+            <p>Dawa za asili zenye ubora wa hali ya juu kutoka kwa wataalamu wetu</p>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('1.jpg');"></div>
+                <div class="product-info">
+                    <h3>Dawa ya Sukari</h3>
+                    <p>Inashusha kiwango cha sukari mwilini kwa njia ya asili</p>
+                    <div class="price">Tsh 25,000</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('2.jpg');"></div>
+                <div class="product-info">
+                    <h3>Dawa ya Shinikizo la Damu</h3>
+                    <p>Inasaidia kudhibiti shinikizo la damu kwa ufanisi</p>
+                    <div class="price">Tsh 30,000</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('3.jpg');"></div>
+                <div class="product-info">
+                    <h3>Dawa ya Maumivu ya Viungo</h3>
+                    <p>Inapunguza maumivu ya viungo na misuli</p>
+                    <div class="price">Tsh 20,000</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('4.jpg');"></div>
+                <div class="product-info">
+                    <h3>Dawa ya Uzimai</h3>
+                    <p>Inaimarisha nguvu za kiume na kurejesha uwezo wa ndoa</p>
+                    <div class="price">Tsh 35,000</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background-image: url('5.jpg');"></div>
+                <div class="product-info">
+                    <h3>Dawa ya Uchafu Uke</h3>
+                    <p>Inasafisha na kutibu magonjwa ya uke kwa asili</p>
+                    <div class="price">Tsh 18,000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conditions Section -->
+    <section id="conditions">
+        <div class="section-title">
+            <h2>Magonjwa Tunayotibu</h2>
+            <p>TAZ GENIUS inatibu magonjwa mbalimbali kwa kutumia dawa za asili zenye nguvu</p>
+        </div>
+        <div class="condition-grid">
+            <div class="condition-card">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Shinikizo la Damu</h3>
+                <p>Tunasaidia kudhibiti shinikizo la damu kwa njia ya asili bila madhara.</p>
+            </div>
+            <div class="condition-card">
+                <i class="fas fa-prescription-bottle"></i>
+                <h3>Ugonjwa wa Sukari</h3>
+                <p>Dawa zetu za asili zinashusha kiwango cha sukari mwilini kwa ufanisi.</p>
+            </div>
+            <div class="condition-card">
+                <i class="fas fa-bone"></i>
+                <h3>Maumivu ya Viungo</h3>
+                <p>Tunapunguza maumivu ya viungo, mgongo na misuli kwa dawa za asili.</p>
+            </div>
+            <div class="condition-card">
+                <i class="fas fa-male"></i>
+                <h3>Uzimai</h3>
+                <p>Tunasaidia kurejesha nguvu za kiume na uwezo wa ndoa kwa asili.</p>
+            </div>
+            <div class="condition-card">
+                <i class="fas fa-female"></i>
+                <h3>Matatizo ya Uzazi</h3>
+                <p>Tunatibu matatizo mbalimbali ya uzazi kwa wanawake kwa njia ya asili.</p>
+            </div>
+            <div class="condition-card">
+                <i class="fas fa-star-and-crescent"></i>
+                <h3>Usafishaji wa Nyota</h3>
+                <p>Tunatoa huduma za kusafisha nyota kwa matatizo ya kiroho na kimetapo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="section-title">
+            <h2>Video Zaidi Kuhusu TAZ GENIUS</h2>
+            <p>Tazama video zetu za maelezo kuhusu huduma na bidhaa zetu</p>
+        </div>
+        <div class="video-container">
+            <div class="video-placeholder">
+                <div>
+                    <i class="fas fa-play-circle"></i>
+                    <p>Video ya TAZ GENIUS - Tiba Asili Tanzania</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title">
+            <h2>Maoni ya Wateja</h2>
+            <p>Wateja wetu wanachosema kuhusu huduma na bidhaa zetu</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    Nimekuwa na shida ya sukari kwa miaka 5. Baada ya kutumia dawa ya TAZ GENIUS kwa wiki 2 tu, sukari yangu imeshuka kutoka 350 hadi 120. Nahisi kama mtu mpya!
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-img" style="background-image: url('customer1.jpg');"></div>
+                    <div class="author-info">
+                        <h4>Juma Mohamed</h4>
+                        <p>Dar es Salaam</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    Shinikizo la damu limekuwa shida yangu kwa miaka mingi. Dawa ya TAZ GENIUS imenisaidia kudhibiti shinikizo langu bila kuhitaji dawa za kikemikali. Nimeshikwa na matokeo mazuri.
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-img" style="background-image: url('customer2.jpg');"></div>
+                    <div class="author-info">
+                        <h4>Asha Juma</h4>
+                        <p>Mwanza</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    Nilitumia huduma ya usafishaji wa nyota kwa sababu nilikuwa na bahati mbaya kila kitu nilichokifanya. Baada ya huduma yao, maisha yamebadilika kabisa. Sasa nina biashara nzuri na familia imara.
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-img" style="background-image: url('customer3.jpg');"></div>
+                    <div class="author-info">
+                        <h4>Robert Kileo</h4>
+                        <p>Arusha</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-title">
+            <h2>Wasiliana Nasi</h2>
+            <p>Tupatie ujumbe wako au tuwasilie swali lako</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Maelezo Ya Mawasiliano</h3>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Eneo Letu</h4>
+                        <p>PUGU KWA RAISI, Dar es Salaam, Tanzania</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Namba Za Simu</h4>
+                        <p>0766 64 65 21<br>0656 46 65 21<br>0698 64 75 2</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Barua Pepe</h4>
+                        <p>info@tazgenius.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Masaa Ya Huduma</h4>
+                        <p>Jumapili - Ijumaa: 8:00 asubuhi - 8:00 jioni<br>Jumamosi: 9:00 asubuhi - 6:00 jioni</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>Tuma Ujumbe</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Jina Kamili</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Namba Ya Simu</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Barua Pepe</label>
+                        <input type="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Ujumbe Wako</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Tuma Ujumbe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>TAZ GENIUS</h3>
+                <p>Wataalamu wa tiba za asili na usafishaji wa nyota. Tunakupa afya bora kwa njia ya asili bila madhara.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Viungo Vya Haraka</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Nyumbani</a></li>
+                    <li><a href="#products">Bidhaa Zetu</a></li>
+                    <li><a href="#conditions">Magonjwa</a></li>
+                    <li><a href="#about">Kuhusu Sisi</a></li>
+                    <li><a href="#testimonials">Maoni</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Bidhaa Zetu</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Dawa ya Sukari</a></li>
+                    <li><a href="#">Dawa ya Shinikizo</a></li>
+                    <li><a href="#">Dawa ya Maumivu</a></li>
+                    <li><a href="#">Dawa ya Uzimai</a></li>
+                    <li><a href="#">Dawa za Uchafu Uke</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Huduma Zetu</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Matibabu ya Magonjwa</a></li>
+                    <li><a href="#">Usafishaji wa Nyota</a></li>
+                    <li><a href="#">Mapishi ya Lishe Bora</a></li>
+                    <li><a href="#">Usaidizi wa Kiroho</a></li>
+                    <li><a href="#">Ushauri wa Afya</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 TAZ GENIUS - Tiba Asili Tanzania. Haki zote zimehifadhiwa. | Developed by MATO MEDIA TZ</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/255766646521" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Slider Functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+        
+        // Mobile Menu Toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Form Submission
+        const contactForm = document.querySelector('form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Asante! Ujumbe wako umepokelewa. Tutawasiliana nawe hivi karibuni.');
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
